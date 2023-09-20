@@ -21,3 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('commandes',
     \App\Http\Controllers\Api\CommandeController::class);
+Route::apiResource('ligne-commandes',
+    \App\Http\Controllers\Api\LigneCommandeController::class);
