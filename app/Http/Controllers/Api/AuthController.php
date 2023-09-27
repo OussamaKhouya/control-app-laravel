@@ -62,7 +62,7 @@ class AuthController extends Controller
     }
 
     public function find(String $username){
-        $user = User::select('name','role')->where('username', $username)->first();
+        $user = User::select('name','username','role')->where('username', $username)->first();
 
         if($user) {
            return $user;
