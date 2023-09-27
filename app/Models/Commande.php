@@ -17,8 +17,13 @@ class Commande extends Model
 
     protected $dates = ['date'];
 
-    public function setDateAttribute($value){
-        $this->attributes['date'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
-            ->format('Y-m-d H:i:s');
+    public function ligneCommandes()
+    {
+        return $this->hasMany(LigneCommande::class,'numpiece','numpiece');
     }
+    // comment setDateAttribue if you want to use faker
+//    public function setDateAttribute($value){
+//        $this->attributes['date'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
+//            ->format('Y-m-d H:i:s');
+//    }
 }

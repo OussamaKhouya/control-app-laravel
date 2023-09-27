@@ -15,7 +15,6 @@ class CreateCommandesTable extends Migration
     {
         Schema::create('commandes', function (Blueprint $table) {
             $table->string('numpiece')->unique();
-            $table->primary('numpiece');
             $table->dateTime('date')->nullable();
             $table->string('client')->nullable();
             $table->string('etat')->nullable();
@@ -24,6 +23,9 @@ class CreateCommandesTable extends Migration
             $table->boolean('control1')->default(false);
             $table->boolean('control2')->default(false);
             $table->timestamps();
+
+            $table->primary('numpiece');
+
         });
     }
 

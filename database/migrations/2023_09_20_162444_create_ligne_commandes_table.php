@@ -14,10 +14,14 @@ class CreateLigneCommandesTable extends Migration
     public function up()
     {
         Schema::create('ligne_commandes', function (Blueprint $table) {
-            $table->bigIncrements('numero');
-            $table->string('numpiece');
+            $table->bigIncrements('id');
+            $table->bigInteger('numero',false, true)->unique();
+            $table->string('numpiece')->references('numpiece')->on('commandes');
             $table->string('designation')->nullable();
+            $table->string('observation')->nullable();
             $table->float('quantite', 16,4,true);
+            $table->float('quantite_partiel', 16,4,true)->nullable();
+            $table->float('quantite_liv', 16,4,true)->nullable();
             $table->timestamps();
         });
     }

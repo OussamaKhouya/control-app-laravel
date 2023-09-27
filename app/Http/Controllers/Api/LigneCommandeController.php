@@ -47,6 +47,14 @@ class LigneCommandeController extends Controller
         return new LigneCommandeResource($ligneCommande);
     }
 
+    public function search(Request $request)
+    {
+        $numpiece = $request->input('numpiece');
+
+        return LigneCommandeResource::collection(LigneCommande::where('numpiece','=',$numpiece)->get());
+
+    }
+
     /**
      * Update the specified resource in storage.
      *

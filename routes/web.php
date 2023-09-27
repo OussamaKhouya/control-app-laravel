@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/images/{numpiece}/{numero}/{filename}', function (string $numpiece, string $numero, string $filename) {
+    $path = public_path('/storage/images/' . $numpiece . '/' . $numero . '/' . $filename);
+
+    if (!file_exists($path)) {
+        abort(404);
+    }
+    $file = File::get($path);
+    $type = File::mimeType($path);
+    $response = Response::make($file, 200);
+    $response->header("Content-Type", $type);
+    return $response;
+});
