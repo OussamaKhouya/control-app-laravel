@@ -3,22 +3,19 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCommandeRequest;
 use App\Http\Requests\StoreLigneCommandeRequest;
-use App\Http\Requests\UpdateCommandeRequest;
 use App\Http\Requests\UpdateLigneCommandeRequest;
-use App\Http\Resources\CommandeResource;
 use App\Http\Resources\LigneCommandeResource;
-use App\Models\Commande;
 use App\Models\LigneCommande;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class LigneCommandeController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -28,8 +25,8 @@ class LigneCommandeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(StoreLigneCommandeRequest $request)
     {
@@ -39,8 +36,8 @@ class LigneCommandeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\LigneCommande  $ligneCommande
-     * @return \Illuminate\Http\Response
+     * @param LigneCommande $ligneCommande
+     * @return Response
      */
     public function show(LigneCommande $ligneCommande)
     {
@@ -50,29 +47,36 @@ class LigneCommandeController extends Controller
     public function search(Request $request)
     {
         $numpiece = $request->input('numpiece');
-
-        return LigneCommandeResource::collection(LigneCommande::where('numpiece','=',$numpiece)->get());
+        if ($numpiece) {
+            return LigneCommandeResource::collection(LigneCommande::where('numpiece', '=', $numpiece)->get());
+        }
+        $numero = $request->input('numero');
+        if ($numero) {
+            return LigneCommandeResource::collection(LigneCommande::where('numero', '=', $numero)->get());
+        }
 
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\LigneCommande  $ligneCommande
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param LigneCommande $ligneCommande
+     * @return Response
      */
-    public function update(UpdateLigneCommandeRequest $request, LigneCommande $ligneCommande)
+    public function update(UpdateLigneCommandeRequest $request, $numero)
     {
-        $ligneCommande->update($request->validated());
+        $ligneCommande = LigneCommande::where('numero', $numero)->firstOrFail();
+       $ligneCommande->update($request->validated());
         return new LigneCommandeResource($ligneCommande);
+        return $ligneCommande;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\LigneCommande  $ligneCommande
-     * @return \Illuminate\Http\Response
+     * @param LigneCommande $ligneCommande
+     * @return Response
      */
     public function destroy(LigneCommande $ligneCommande)
     {

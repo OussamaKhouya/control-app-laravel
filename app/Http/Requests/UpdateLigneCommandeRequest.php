@@ -24,7 +24,9 @@ class UpdateLigneCommandeRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantite' => 'nullable',
+            'observation' => 'nullable',
+            'quantitePartiel' => 'nullable',
+            'quantiteLiv' => 'nullable',
         ];
     }
 }
