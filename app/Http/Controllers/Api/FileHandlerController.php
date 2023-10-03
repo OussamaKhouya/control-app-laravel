@@ -15,7 +15,7 @@ class FileHandlerController extends Controller
     public function upload(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'file' => 'required|file|max:2048|mimes:jpeg,bmp,png,gif,svg,jpg,pdf',
+            'file' => 'required|file|max:4092|mimes:jpeg,bmp,png,gif,svg,jpg,pdf',
             'numero' => 'required',
             'numpiece' => 'required',
             'fileName' => 'required'
@@ -54,10 +54,7 @@ class FileHandlerController extends Controller
         foreach ($files as $file) {
             $fileName = basename($file);
             $fileUrl = asset('images/' . $numpiece . '/' . $numero. '/' . $fileName);
-            $fileDetails[] = [
-                'name' => $fileName,
-                'url' => $fileUrl,
-            ];
+            $fileDetails[] = $fileUrl;
         }
         return $fileDetails;
     }
