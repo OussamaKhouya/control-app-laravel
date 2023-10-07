@@ -69,7 +69,6 @@ class LigneCommandeController extends Controller
         $ligneCommande = LigneCommande::where('numero', $numero)->firstOrFail();
        $ligneCommande->update($request->validated());
         return new LigneCommandeResource($ligneCommande);
-        return $ligneCommande;
     }
 
     /**
