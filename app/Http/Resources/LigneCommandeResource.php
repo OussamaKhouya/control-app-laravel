@@ -19,9 +19,12 @@ class LigneCommandeResource extends JsonResource
             'numpiece' => $this->numpiece,
             'designation' => $this->designation,
             'quantite' => $this->quantite,
-            'observation' => $this->observation,
-            'quantitePartiel' => $this->quantite_partiel,
-            'quantiteLiv' => $this->quantite_liv,
+            'quantite1' => $this->quantite1,
+            'quantite2' => $this->quantite2,
+            'observation1' => $this->observation1,
+            'observation2' => $this->observation2,
+            'username1' => $this->username1,
+            'username2' => $this->username2,
         ];
     }
 }

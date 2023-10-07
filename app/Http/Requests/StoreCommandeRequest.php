@@ -32,6 +32,7 @@ class StoreCommandeRequest extends FormRequest
             'commercial' => 'nullable',
             'control1' => 'nullable',
             'control2' => 'nullable',
+            'ver' => 'nullable',
         ];
     }
 }

@@ -23,6 +23,7 @@ class CommandeResource extends JsonResource
             'commercial' => $this->commercial,
             'control1' => $this->control1,
             'control2' => $this->control2,
+            'ver' => $this->ver,
         ];
     }
 }

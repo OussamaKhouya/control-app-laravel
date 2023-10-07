@@ -48,6 +48,9 @@ class FileHandlerController extends Controller
     public function getFilesInFolder(string $numpiece, string $numero)
     {
         $folderPath = public_path('/storage/images/' . $numpiece . '/' . $numero);
+        if(!File::isDirectory($folderPath)){
+            return [];
+        }
         $files = File::files($folderPath);
 
         $fileDetails = [];

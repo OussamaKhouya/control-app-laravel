@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class LigneCommande extends Model
 {
     use HasFactory;
+    public $nbrPhoto = 0;
 
     protected $table = 'ligne_commandes';
     protected $primaryKey = 'id';
-    protected $fillable = ['numero','numpiece','designation','quantite','observation' ,'quantitePartiel' ,'quantiteLiv'];
+    protected $fillable = ['numero','numpiece','designation','quantite','quantite1','quantite2','observation1','observation2','username1','username2','nbrPhoto'];
 
 
     public function commande()
@@ -20,22 +21,22 @@ class LigneCommande extends Model
     }
 
 
-    public function getQuantitePartielAttribute($value)
-    {
-        return $value;
-    }
-    public function getQuantiteLivAttribute($value)
-    {
-        return $value;
-    }
-    public function setQuantitePartielAttribute($value)
-    {
-        $this->attributes['quantite_partiel'] = $value;
-    }
-    public function setQuantiteLivAttribute($value)
-    {
-        $this->attributes['quantite_liv'] = $value;
-    }
+//    public function getQuantitePartielAttribute($value)
+//    {
+//        return $value;
+//    }
+//    public function getQuantiteLivAttribute($value)
+//    {
+//        return $value;
+//    }
+//    public function setQuantitePartielAttribute($value)
+//    {
+//        $this->attributes['quantite_partiel'] = $value;
+//    }
+//    public function setQuantiteLivAttribute($value)
+//    {
+//        $this->attributes['quantite_liv'] = $value;
+//    }
 
 
 }

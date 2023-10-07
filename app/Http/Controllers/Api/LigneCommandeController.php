@@ -46,15 +46,35 @@ class LigneCommandeController extends Controller
 
     public function search(Request $request)
     {
+        $fileController = new FileHandlerController;
+
         $numpiece = $request->input('numpiece');
         if ($numpiece) {
-            return LigneCommandeResource::collection(LigneCommande::where('numpiece', '=', $numpiece)->get());
+            $listlc = LigneCommandeResource::collection(LigneCommande::where('numpiece', $numpiece)->get());
+
+            $newListlc = [];
+            foreach ($listlc as $lc) {
+           $photos = $fileController->getFilesInFolder($lc->numpiece, $lc->numero);
+                $newListlc[] =[
+                    'numero' => $lc->numero,
+                    'numpiece' => $lc->numpiece,
+                    'designation' => $lc->designation,
+                    'quantite' => $lc->quantite,
+                    'quantite1' => $lc->quantite1,
+                    'quantite2' => $lc->quantite2,
+                    'observation1' => $lc->observation1,
+                    'observation2' => $lc->observation2,
+                    'username1' => $lc->username1,
+                    'username2' => $lc->username2,
+                    'nbrPhoto' => count($photos)
+                ];
+            }
+            return $newListlc;
         }
         $numero = $request->input('numero');
         if ($numero) {
             return LigneCommandeResource::collection(LigneCommande::where('numero', '=', $numero)->get());
         }
-
     }
 
     /**
