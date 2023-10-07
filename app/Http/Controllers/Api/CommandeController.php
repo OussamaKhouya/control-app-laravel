@@ -9,7 +9,6 @@ use App\Http\Resources\CategoryResource;
 use App\Http\Resources\CommandeResource;
 use App\Models\Category;
 use App\Models\Commande;
-use Illuminate\Http\Request;
 
 class CommandeController extends Controller
 {

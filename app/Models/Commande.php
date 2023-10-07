@@ -13,7 +13,7 @@ class Commande extends Model
     protected $primaryKey = 'numpiece';
     protected $keyType = 'string';
 
-    protected $fillable = ['numpiece','date','client','etat', 'saisie','commercial','control1','control2'];
+    protected $fillable = ['numpiece','date','client','etat', 'saisie','commercial','control1','control2','ver'];
 
     protected $dates = ['date'];
 
