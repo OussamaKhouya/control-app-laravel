@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
@@ -15,7 +14,7 @@ class FileHandlerController extends Controller
     public function upload(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'file' => 'required|file|max:4092|mimes:jpeg,bmp,png,gif,svg,jpg,pdf',
+            'file' => 'required',
             'numero' => 'required',
             'numpiece' => 'required',
             'fileName' => 'required'

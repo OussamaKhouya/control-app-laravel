@@ -17,7 +17,8 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users',
-            'password' => ['required', 'confirmed', Password::default()],
+//            'password' => ['required', 'confirmed', Password::default()],
+            'password' => ['required', 'confirmed'],
             'role' => ['required',Rule::in(['SAISIE', 'COMMERCIAL','CONTROL1','CONTROL2','ADMIN'])],
             'device_name' => 'required',
         ]);
@@ -28,7 +29,6 @@ class AuthController extends Controller
             'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
-
         return [
             'name' => $user->name,
             'username' => $user->username,
