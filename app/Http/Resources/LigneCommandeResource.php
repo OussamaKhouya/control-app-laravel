@@ -15,16 +15,19 @@ class LigneCommandeResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'numero' => $this->numero,
-            'numpiece' => $this->numpiece,
-            'designation' => $this->designation,
-            'quantite' => $this->quantite,
-            'quantite1' => $this->quantite1,
-            'quantite2' => $this->quantite2,
-            'observation1' => $this->observation1,
-            'observation2' => $this->observation2,
-            'username1' => $this->username1,
-            'username2' => $this->username2,
+            'a_bcc_num' => $this->a_bcc_num,
+            'a_bcc_nupi' => $this->a_bcc_nupi,
+            'a_bcc_lib' => $this->a_bcc_lib,
+            'a_bcc_dep' => $this->a_bcc_dep,
+            'a_bcc_qua' => $this->a_bcc_qua,
+            'a_bcc_coe' => $this->a_bcc_coe,
+            'a_bcc_boi' => $this->a_bcc_boi,
+            'a_bcc_quch1' => $this->a_bcc_quch1,
+            'a_bcc_boch1' => $this->a_bcc_boch1,
+            'a_bcc_obs1' => $this->a_bcc_obs1,
+            'a_bcc_quch2' => $this->a_bcc_quch2,
+            'a_bcc_boch2' => $this->a_bcc_boch2,
+            'a_bcc_obs2' => $this->a_bcc_obs2,
         ];
     }
 }

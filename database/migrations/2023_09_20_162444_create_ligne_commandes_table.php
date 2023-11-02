@@ -13,15 +13,21 @@ class CreateLigneCommandesTable extends Migration
      */
     public function up()
     {
-        Schema::create('ligne_commandes', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('numero',false, true)->unique();
-            $table->string('numpiece')->references('numpiece')->on('commandes');
-            $table->string('designation')->nullable();
-            $table->string('observation')->nullable();
-            $table->float('quantite', 16,4,true);
-            $table->float('quantite_partiel', 16,4,true)->nullable();
-            $table->float('quantite_liv', 16,4,true)->nullable();
+        Schema::create('m_a_bcc', function (Blueprint $table) {
+            $table->integer('a_bcc_num',false, true)->unique();
+            $table->string('a_bcc_nupi')->references('bcc_nupi')->on('m_bcc');
+            $table->string('a_bcc_lib')->nullable();
+            $table->string('a_bcc_dep')->nullable();
+            $table->float('a_bcc_qua', 16,4,true);
+            $table->float('a_bcc_coe', 16,4,true);
+            $table->float('a_bcc_boi', 16,4,true);
+            $table->float('a_bcc_quch1', 16,4,true);
+            $table->float('a_bcc_boch1', 16,4,true);
+            $table->string('a_bcc_obs1')->nullable();
+            $table->float('a_bcc_quch2', 16,4,true);
+            $table->float('a_bcc_boch2', 16,4,true);
+            $table->string('a_bcc_obs2')->nullable();
+
             $table->timestamps();
         });
     }

@@ -24,12 +24,19 @@ class UpdateLigneCommandeRequest extends FormRequest
     public function rules()
     {
         return [
-            'observation1' => 'nullable',
-            'observation2' => 'nullable',
-            'quantite1' => 'nullable',
-            'quantite2' => 'nullable',
-            'username1' => 'nullable',
-            'username2' => 'nullable'
+            'a_bcc_num' => 'nullable',
+            'a_bcc_nupi' => 'nullable',
+            'a_bcc_lib' => 'nullable',
+            'a_bcc_dep' => 'nullable',
+            'a_bcc_qua' => 'nullable',
+            'a_bcc_coe' => 'nullable',
+            'a_bcc_boi' => 'nullable',
+            'a_bcc_quch1' => 'nullable',
+            'a_bcc_boch1' => 'nullable',
+            'a_bcc_obs1' => 'nullable',
+            'a_bcc_quch2' => 'nullable',
+            'a_bcc_boch2' => 'nullable',
+            'a_bcc_obs2' => 'nullable',
         ];
     }
 }

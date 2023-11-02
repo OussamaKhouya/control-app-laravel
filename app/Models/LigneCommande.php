@@ -10,33 +10,13 @@ class LigneCommande extends Model
     use HasFactory;
     public $nbrPhoto = 0;
 
-    protected $table = 'ligne_commandes';
-    protected $primaryKey = 'id';
-    protected $fillable = ['numero','numpiece','designation','quantite','quantite1','quantite2','observation1','observation2','username1','username2','nbrPhoto'];
-
+    protected $table = 'm_a_bcc';
+    protected $primaryKey = 'a_bcc_num';
+    protected $fillable = ['a_bcc_num','a_bcc_nupi','a_bcc_lib','a_bcc_dep','a_bcc_qua','a_bcc_coe','a_bcc_boi','a_bcc_quch1','a_bcc_boch1','a_bcc_obs1','a_bcc_quch2','a_bcc_boch2','a_bcc_obs2'];
 
     public function commande()
     {
-        return $this->belongsTo(Commande::class,'numpiece','numpiece');
+        return $this->belongsTo(Commande::class,'a_bcc_nupi','bcc_nupi');
     }
-
-
-//    public function getQuantitePartielAttribute($value)
-//    {
-//        return $value;
-//    }
-//    public function getQuantiteLivAttribute($value)
-//    {
-//        return $value;
-//    }
-//    public function setQuantitePartielAttribute($value)
-//    {
-//        $this->attributes['quantite_partiel'] = $value;
-//    }
-//    public function setQuantiteLivAttribute($value)
-//    {
-//        $this->attributes['quantite_liv'] = $value;
-//    }
-
 
 }

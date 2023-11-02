@@ -14,10 +14,20 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $role = $this->faker->randomElement(['SAISIE', 'COMMERCIAL','CONTROL1','CONTROL2','ADMIN','USER']);
+        $username = [
+            'SAISIE' => 'sai',
+            'COMMERCIAL' => 'com',
+            'CONTROL1' => 'con1',
+            'CONTROL2' => 'con2',
+            'ADMIN' => 'admin',
+            'USER' => 'user',
+        ];
         return [
             'name' => $this->faker->name(),
-            'username' => $this->faker->unique(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'username' => $username[$role],
+            'role' => $role,
+            "password"=>bcrypt("123"),
             'remember_token' => Str::random(10),
         ];
     }

@@ -22,8 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
-    Route::apiResource('commandes',
-        \App\Http\Controllers\Api\CommandeController::class);
+    Route::get('commandes/stats', [\App\Http\Controllers\Api\CommandeController::class, 'stats']);
+    Route::get('commandes/all', [\App\Http\Controllers\Api\CommandeController::class, 'all']);
+    Route::get('commandes/new', [\App\Http\Controllers\Api\CommandeController::class, 'new']);
+    Route::post('commandes/search', [\App\Http\Controllers\Api\CommandeController::class, 'search']);
+
+    Route::apiResource('commandes', \App\Http\Controllers\Api\CommandeController::class);
+
+
 
     Route::post('ligne-commandes/search', [\App\Http\Controllers\Api\LigneCommandeController::class, 'search']);
 
@@ -32,6 +38,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::post('file/upload', [\App\Http\Controllers\Api\FileHandlerController::class, 'upload']);
     Route::get('file/check/{numpiece}/{numero}', [\App\Http\Controllers\Api\FileHandlerController::class, 'getFilesInFolder']);
+    Route::delete('file/{numpiece}/{numero}/{imgName}', [\App\Http\Controllers\Api\FileHandlerController::class, 'deleteImage']);
 });
 
 Route::post('/auth/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);

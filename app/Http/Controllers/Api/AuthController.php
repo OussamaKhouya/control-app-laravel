@@ -19,7 +19,7 @@ class AuthController extends Controller
             'username' => 'required|string|max:255|unique:users',
 //            'password' => ['required', 'confirmed', Password::default()],
             'password' => ['required', 'confirmed'],
-            'role' => ['required',Rule::in(['SAISIE', 'COMMERCIAL','CONTROL1','CONTROL2','ADMIN'])],
+            'role' => ['required',Rule::in(['SAISIE', 'COMMERCIAL','CONTROL1','CONTROL2','ADMIN','USER'])],
             'device_name' => 'required',
         ]);
 

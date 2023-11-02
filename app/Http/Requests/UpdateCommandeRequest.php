@@ -24,14 +24,21 @@ class UpdateCommandeRequest extends FormRequest
     public function rules()
     {
         return [
-            'date' => 'date',
-            'client' => 'nullable',
-            'etat' => 'nullable',
-            'saisie' => 'nullable',
-            'commercial' => 'nullable',
-            'control1' => 'nullable',
-            'control2' => 'nullable',
-            'ver' => 'nullable',
+            'bcc_nupi' => 'nullable',
+            'bcc_dat' => 'nullable',
+            'bcc_dach1' => 'nullable',
+            'bcc_dach2' => 'nullable',
+            'bcc_lcli' => 'nullable',
+            'bcc_lrep' => 'nullable',
+            'bcc_lexp' => 'nullable',
+            'bcc_veh' => 'nullable',
+            'bcc_eta' => 'nullable',
+            'bcc_val' => 'nullable',
+            'bcc_usr_sai' => 'nullable',
+            'bcc_usr_com' => 'nullable',
+            'bcc_usr_con1' => 'nullable',
+            'bcc_usr_con2' => 'nullable',
+            'bcc_usr_sup' => 'nullable'
         ];
     }
 }

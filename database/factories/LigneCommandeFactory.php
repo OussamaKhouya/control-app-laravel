@@ -17,16 +17,24 @@ class LigneCommandeFactory extends Factory
      */
     public function definition()
     {
-        $commandes = Commande::pluck('numpiece')->toArray();
-        $quantite = $this->faker->randomFloat(2,1000,9999999);
+        $commandes = Commande::pluck('bcc_nupi')->toArray();
+        $quantite = $this->faker->randomFloat(2,10,9999);
+        $coeff = $this->faker->randomFloat(2,2,20);
         return [
-            'numero' => $this->faker->numberBetween(1000,9999),
-            'numpiece' => $this->faker->randomElement($commandes),
-            'designation' => $this->faker->text(15),
-            'observation' => $this->faker->text(30),
-            'quantite' => $quantite,
-            'quantite_partiel' => $this->faker->randomFloat(2,0,$quantite),
-            'quantite_liv' => $this->faker->randomFloat(2,1000,9999999),
+            'a_bcc_num' => $this->faker->numberBetween(10,9999),
+            'a_bcc_nupi' => $this->faker->randomElement($commandes),
+            'a_bcc_lib' => $this->faker->text(15),
+            'a_bcc_dep' => $this->faker->city(),
+            'a_bcc_qua' => $quantite,
+            'a_bcc_coe' => $coeff,
+            'a_bcc_boi' => $quantite/$coeff,
+            'a_bcc_quch1' => $quantite,
+            'a_bcc_boch1' => $quantite/$coeff,
+            'a_bcc_obs1' => $this->faker->text(30),
+            'a_bcc_quch2' => $quantite,
+            'a_bcc_boch2' => $quantite/$coeff,
+            'a_bcc_obs2' => $this->faker->text(30),
+
             'created_at' => now()
         ];
     }
