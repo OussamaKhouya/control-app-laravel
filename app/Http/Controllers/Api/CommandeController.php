@@ -38,6 +38,7 @@ class CommandeController extends Controller
     {
         return CommandeResource::collection(
             Commande::whereIn('bcc_eta', ['INITIAL','EN PREPARATION','TERMINE'])
+                ->whereDate('bcc_dat', '>=', now()->subDays(100)->toDateString())
                 ->orderBy('bcc_dat', 'desc')
                 ->get());
     }
@@ -51,9 +52,7 @@ class CommandeController extends Controller
 
     public function search(Request $request)
     {
-
         $numpiece = $request->input('bcc_nupi');
-
         if ($numpiece) {
             $listlc = CommandeResource::collection(Commande::where('bcc_nupi', $numpiece)->orderBy('bcc_dat', 'desc')->get());
 
@@ -72,14 +71,22 @@ class CommandeController extends Controller
     public function stats()
     {
         $data = Commande::select('bcc_eta', DB::raw('COUNT(*) as count'))
+            ->whereDate('bcc_dat', '>=', now()->subDays(100)->toDateString())
             ->groupBy('bcc_eta')
             ->get();
         $transformedData = collect($data)->pluck('count', 'bcc_eta')
             ->mapWithKeys(function ($item, $key) {
                 return [strtolower($key) => $item];
             });
-
-        return $transformedData->toArray();
+        $status = $transformedData->toArray();
+        $keysToTest = ['initial','en preparation','termine','annule','livree'];
+        foreach ($keysToTest as $key) {
+            if (!isset($status[$key])) {
+                // If it doesn't exist, add it with the value 0
+                $status[$key] = 0;
+            }
+        }
+        return $status;
     }
 
     /**

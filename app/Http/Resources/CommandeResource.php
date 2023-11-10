@@ -16,9 +16,9 @@ class CommandeResource extends JsonResource
     {
         return [
             'bcc_nupi' => $this->bcc_nupi,
-            'bcc_dat' => $this->bcc_dat->format('d-m-Y H:i:s'),
-            'bcc_dach1' => $this->bcc_dach1->format('d-m-Y H:i:s'),
-            'bcc_dach2' => $this->bcc_dach2->format('d-m-Y H:i:s'),
+            'bcc_dat' => CommandeResource::formatDateTime($this->bcc_dat),
+            'bcc_dach1' => CommandeResource::formatDateTime($this->bcc_dach1),
+            'bcc_dach2' => CommandeResource::formatDateTime($this->bcc_dach2),
             'bcc_lcli' => $this->bcc_lcli,
             'bcc_lrep' => $this->bcc_lrep,
             'bcc_lexp' => $this->bcc_lexp,
@@ -31,5 +31,14 @@ class CommandeResource extends JsonResource
             'bcc_usr_con2' => $this->bcc_usr_con2,
             'bcc_usr_sup' => $this->bcc_usr_sup,
         ];
+    }
+
+
+    public function formatDateTime($dateTime, $format = 'd-m-Y H:i:s') {
+        if ($dateTime !== null) {
+            return $dateTime->format($format);
+        } else {
+            return null;
+        }
     }
 }
