@@ -93,7 +93,9 @@ class LigneCommandeController extends Controller
                     'phb' => $phb_bon,
                 ];
             }
-            return $newListlc;
+            // la premiere ligne m_a_bcc de chaque nupi est vide (Taoufik's logic)
+            array_shift($newListlc);
+            return ($newListlc);
         }
         $numero = $request->input('a_bcc_num');
         if ($numero) {
@@ -111,6 +113,11 @@ class LigneCommandeController extends Controller
     public function update(UpdateLigneCommandeRequest $request, $numero)
     {
         $ligneCommande = LigneCommande::where('a_bcc_num', $numero)->firstOrFail();
+
+        if (Controller::checkPermissions($ligneCommande->a_bcc_nupi)) {
+            return response()->json(['message' => 'Unauthenticated'], 401);
+        }
+
        $ligneCommande->update($request->validated());
         return new LigneCommandeResource($ligneCommande);
     }

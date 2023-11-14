@@ -38,7 +38,7 @@ class CommandeController extends Controller
     {
         return CommandeResource::collection(
             Commande::whereIn('bcc_eta', ['INITIAL','EN PREPARATION','TERMINE'])
-                ->whereDate('bcc_dat', '>=', now()->subDays(100)->toDateString())
+                ->whereDate('bcc_dat', '>=', now()->subDays(1000)->toDateString())
                 ->orderBy('bcc_dat', 'desc')
                 ->get());
     }
@@ -71,7 +71,7 @@ class CommandeController extends Controller
     public function stats()
     {
         $data = Commande::select('bcc_eta', DB::raw('COUNT(*) as count'))
-            ->whereDate('bcc_dat', '>=', now()->subDays(100)->toDateString())
+            ->whereDate('bcc_dat', '>=', now()->subDays(1000)->toDateString())
             ->groupBy('bcc_eta')
             ->get();
         $transformedData = collect($data)->pluck('count', 'bcc_eta')

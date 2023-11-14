@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Commande;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Validator;
 
@@ -29,6 +31,10 @@ class FileHandlerController extends Controller
 
             $numero = $request->numero;
             $numpiece = $request->numpiece;
+            if (Controller::checkPermissions($numpiece)) {
+                return response()->json(['message' => 'Unauthenticated'], 401);
+            }
+
             $fileName = $request->fileName;
             $type = $request->type;
             $extension = $request->file('file')->extension();
@@ -92,14 +98,19 @@ class FileHandlerController extends Controller
         return $fileDetails;
     }
 
+
     public function deleteImage(string $numpiece, string $numero, string $imgName)
     {
-        $FolderPath = public_path('/storage/images/' . $numpiece . '/' . $numero . '/');
 
-        if($imgName == 'camion.jpg' || $imgName == 'bon.jpg') {
-            $FolderPath = public_path('/storage/images/' . $numpiece . '/');
+        if (Controller::checkPermissions($numpiece)) {
+           return response()->json(['message' => 'Unauthenticated'], 401);
         }
 
+        $FolderPath = public_path('/storage/images/' . $numpiece . '/' . $numero . '/');
+
+        if ($imgName == 'camion.jpg' || $imgName == 'bon.jpg') {
+            $FolderPath = public_path('/storage/images/' . $numpiece . '/');
+        }
 
         if (File::exists($FolderPath . $imgName)) {
             File::delete($FolderPath . $imgName);
@@ -112,10 +123,12 @@ class FileHandlerController extends Controller
                 File::move($FolderPath . 'c2_2.jpg', $FolderPath . $imgName);
             }
 
-            return response()->json(['message' => 'Image '.$imgName.' supprimée avec succès'], 200);
+            return response()->json(['message' => 'Image ' . $imgName . ' supprimée avec succès'], 200);
         } else {
-            return response()->json(['message' => 'Image '.$imgName.' non trouvée'], 404);
+            return response()->json(['message' => 'Image ' . $imgName . ' non trouvée'], 404);
         }
+
+
     }
 
 }

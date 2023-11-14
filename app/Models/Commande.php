@@ -31,12 +31,20 @@ class Commande extends Model
             ->format('Y-m-d H:i:s');
     }
     public function setBccDach1Attribute($value){
-        $this->attributes['bcc_dach1'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
-            ->format('Y-m-d H:i:s');
+        if($value == null){
+            $this->attributes['bcc_dach1'] = null;
+        }else {
+            $this->attributes['bcc_dach1'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
+                ->format('Y-m-d H:i:s');
+        }
     }
     public function setBccDach2Attribute($value){
-        $this->attributes['bcc_dach2'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
-            ->format('Y-m-d H:i:s');
+        if($value == null){
+            $this->attributes['bcc_dach2'] = null;
+        }else {
+            $this->attributes['bcc_dach2'] = Carbon::createFromFormat('d-m-Y H:i:s', $value)
+                ->format('Y-m-d H:i:s');
+        }
     }
 
 
