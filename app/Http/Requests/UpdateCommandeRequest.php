@@ -25,9 +25,9 @@ class UpdateCommandeRequest extends FormRequest
     {
         return [
             'bcc_nupi' => 'nullable',
-            'bcc_dat' => 'nullable',
-            'bcc_dach1' => 'nullable',
-            'bcc_dach2' => 'nullable',
+            'bcc_dat' => 'nullable|date',
+            'bcc_dach1' => 'nullable|date',
+            'bcc_dach2' => 'nullable|date',
             'bcc_lcli' => 'nullable',
             'bcc_lrep' => 'nullable',
             'bcc_lexp' => 'nullable',

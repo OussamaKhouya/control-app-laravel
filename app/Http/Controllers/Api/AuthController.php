@@ -45,10 +45,18 @@ class AuthController extends Controller
         ]);
 
         $user = User::where('username', $request->username)->first();
+        $allowedRoles = false;
 
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if($request->device_name == 'mobile'){
+            $allowedRoles = in_array($user->role, ['CONTROL1','CONTROL2', 'USER']);
+        }
+        if($request->device_name == 'web'){
+            $allowedRoles = in_array($user->role, ['ADMIN', 'USER']);
+        }
+
+        if (! $user || ! Hash::check($request->password, $user->password) || ! $allowedRoles) {
             throw ValidationException::withMessages([
-                'message' => ['The provided credentials are incorrect.'],
+                'message' => ['Les identifiants fournis sont incorrects.'],
             ]);
         }
 

@@ -31,9 +31,9 @@ class FileHandlerController extends Controller
 
             $numero = $request->numero;
             $numpiece = $request->numpiece;
-            if (Controller::checkPermissions($numpiece)) {
-                return response()->json(['message' => 'Unauthenticated'], 401);
-            }
+//            if (Controller::checkPermissions($numpiece)) {
+//                return response()->json(['message' => 'Unauthenticated'], 401);
+//            }
 
             $fileName = $request->fileName;
             $type = $request->type;
@@ -102,9 +102,9 @@ class FileHandlerController extends Controller
     public function deleteImage(string $numpiece, string $numero, string $imgName)
     {
 
-        if (Controller::checkPermissions($numpiece)) {
-           return response()->json(['message' => 'Unauthenticated'], 401);
-        }
+//        if (Controller::checkPermissions($numpiece)) {
+//           return response()->json(['message' => 'Unauthenticated'], 401);
+//        }
 
         $FolderPath = public_path('/storage/images/' . $numpiece . '/' . $numero . '/');
 
